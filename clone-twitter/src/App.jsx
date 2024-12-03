@@ -9,9 +9,24 @@ function App() {
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
-    console.log(tweets);
-  }, [tweets]);
+    const interval = setInterval(() => {
+      addNewRandomTweets();
+    }, 9000);
+    return () => clearInterval(interval);
+  }, []);
 
+  const addNewRandomTweets = () => {
+    const randomTweets = [
+      'Acabei de me juntar à galera no Twitter! Ansioso para compartilhar e aprender com todos. 🚀 #NovoPorAqui',
+      'Mais uma jornada de codificação começando. Vamos que vamos, programadores! 👨‍💻 #DesenvolvedorEmAção',
+      'Quem mais vai ficar acordado para observar as estrelas cadentes essa noite? 🌌 #NoiteMágica',
+      'Lembre-se: a gentileza é a chave para um dia melhor. Trate-se bem e espalhe boas vibrações! 🌸 #AmorPróprio',
+      'Dica rápida: nunca subestime o poder de uma boa organização de arquivos. Seu futuro eu vai agradecer! 🗂️ #DicaDeProdutividade',
+    ];
+    const randomTweet =
+      randomTweets[Math.floor(Math.random() * randomTweets.length)];
+    addNewTweet(randomTweet, Math.random() > 0.7);
+  };
   const addNewTweet = (content, includeImage = false) => {
     const newTweet = {
       id: v4(),
