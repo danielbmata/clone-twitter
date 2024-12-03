@@ -2,9 +2,9 @@ import CryptoJS from 'crypto-js';
 
 export const getAvatar = (email) => {
   const hash = CryptoJS.MD5(email.trim().toLowerCase());
-  return `https://www.gravatar.com/avatar/${ hash }`;
+  return `https://www.gravatar.com/avatar/${ hash }?s=39&d=identicon`;
 };
 
 export const getRandomImage = () => {
-    return `https://picsum.photos/seed/picsum/600/400?random${Math.random()}`
+  return `https://picsum.photos/seed/${Math.random()}/600/400`
 }

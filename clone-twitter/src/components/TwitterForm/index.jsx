@@ -7,15 +7,27 @@ import {
   faSmile,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useRef } from 'react';
+
 
 export function TwitterForm({ onTweet }) {
-  function handleSubmit() {}
+
+  const textAreaRef = useRef()
+
+
+  function handleSubmit() {
+    if(textAreaRef.current.value){
+      onTweet(textAreaRef.current.value)
+      textAreaRef.current.value = ''
+    }
+  }
 
   return (
     <div className="border-b  border-gray-800 p-4">
       <textarea
         className="w-full bg-transparent text-white text-xl resize-none outline-none"
-        placeholder="What's happening?"
+        placeholder="What's happening?" 
+        ref={textAreaRef}
       />
       <div className="flex justify-between items-center mt-4">
         <div className="flex space-x-3">

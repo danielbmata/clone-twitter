@@ -3,10 +3,15 @@ import { Tweet } from './components/Tweet';
 import { TwitterForm } from './components/TwitterForm';
 import { v4 } from 'uuid';
 import { getAvatar, getRandomImage } from './utils/generateImages';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [tweets, setTweets] = useState([]);
+
+  useEffect(() => {
+    console.log(tweets);
+  }, [tweets]);
+
   const addNewTweet = (content, includeImage = false) => {
     const newTweet = {
       id: v4(),
@@ -17,11 +22,11 @@ function App() {
       time: new Date().toLocaleString([], {
         hour: '2-digit',
         minute: '2-digit',
-        image: includeImage ? getRandomImage() : null,
-        likes: 0,
-        retweets: 0,
-        comments: 0,
       }),
+      image: includeImage ? getRandomImage() : null,
+      likes: 0,
+      retweets: 0,
+      comments: 0,
     };
     setTweets((prevTweets) => [newTweet, ...prevTweets]);
   };
@@ -32,9 +37,13 @@ function App() {
         <header className="sticky top-0 z-10 bg-twitter-background bg-opacity-80 backdrop-blur-sm">
           <h2 className="px-4 py-3 text-xl font-bold">For You</h2>
         </header>
-        <TwitterForm />
+        <TwitterForm
+          onTweet={(content) => addNewTweet(content, Math.random() > 0.6)}
+        />
         <div>
-          <Tweet />
+          {tweets.map((tweet) => (
+            <Tweet key={tweet.id} tweet={tweet} />
+          ))}
         </div>
       </main>
     </div>
