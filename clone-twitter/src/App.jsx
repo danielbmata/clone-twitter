@@ -4,6 +4,8 @@ import { TwitterForm } from './components/TwitterForm';
 import { v4 } from 'uuid';
 import { getAvatar, getRandomImage } from './utils/generateImages';
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [tweets, setTweets] = useState([]);
@@ -61,6 +63,14 @@ function App() {
           ))}
         </div>
       </main>
+      <aside className='hidden xl:block w-80 px-4'>
+        <div className='sticky top-0 pt-2'>
+          <div className='relative'>
+            <FontAwesomeIcon icon={faSearch} className='absolute top-3 left-3 text-gray-500'/>
+            <input type="text" placeholder='Search Twitter' className='w-full bg-gray-800 text-white rounded-full outline-none py-2 pl-10 pr-4'/>
+          </div>
+        </div>
+      </aside>
     </div>
   );
 }

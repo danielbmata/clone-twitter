@@ -8,17 +8,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
-
+import PropTypes from 'prop-types';
 
 export function TwitterForm({ onTweet }) {
-
-  const textAreaRef = useRef()
-
+  const textAreaRef = useRef();
 
   function handleSubmit() {
-    if(textAreaRef.current.value){
-      onTweet(textAreaRef.current.value)
-      textAreaRef.current.value = ''
+    if (textAreaRef.current.value) {
+      onTweet(textAreaRef.current.value);
+      textAreaRef.current.value = '';
     }
   }
 
@@ -26,7 +24,7 @@ export function TwitterForm({ onTweet }) {
     <div className="border-b  border-gray-800 p-4">
       <textarea
         className="w-full bg-transparent text-white text-xl resize-none outline-none"
-        placeholder="What's happening?" 
+        placeholder="What's happening?"
         ref={textAreaRef}
       />
       <div className="flex justify-between items-center mt-4">
@@ -66,3 +64,6 @@ export function TwitterForm({ onTweet }) {
     </div>
   );
 }
+TwitterForm.propTypes = {
+  onTweet: PropTypes.func,
+};
